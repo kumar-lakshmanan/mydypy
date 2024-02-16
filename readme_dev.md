@@ -104,33 +104,32 @@ python manage.py makemigrations
 
 ---------------------------------
 containerize
-
-
-- CREATE DOCKERFILE 
-- BUILD USING CMD:
-    docker build -t mydypy .
-
-- RUN USING CMD:
-    docker run -it -p 8000:8000 mydypy
-
-
-
--------
-
+---
 
 docker login -u kaymatrix
-ACCESS TOKEN
+pas: ACCESS TOKEN
+
+docker init
+-
+-
+docker compose up --build
+
+<edit files>
+CREATED: .dockerignore
+CREATED: Dockerfile
+CREATED: compose.yaml
+CREATED: README.Docker.md
+<edit files>
 
 docker build -t mydypy .
 docker run -it -p 8000:8000 mydypy
 docker tag mydypy kaymatrix/mydypy
 docker push kaymatrix/mydypy
-
-docker run -it -p 8080:8080 --user=root -v /var/run/docker.sock:/var/run/docker.sock -v /tmp:/tmp kestra/kestra:latest-full server local
-docker run --hostname=79a3adb99c2a --env=PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin --env=LANG=C.UTF-8 --env=GPG_KEY=A035C8C19219BA821ECEA86B64E628F8D684696D --env=PYTHON_VERSION=3.11.8 --env=PYTHON_PIP_VERSION=24.0 --env=PYTHON_SETUPTOOLS_VERSION=65.5.1 --env=PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/dbf0c85f76fb6e1ab42aa672ffca6f0a675d9ee4/public/get-pip.py --env=PYTHON_GET_PIP_SHA256=dfe9fd5c28dc98b5ac17979a953ea550cec37ae1b47a5116007395bfacff2ab9 --env=PYTHONUNBUFFERED=1 --workdir=/pyone -p 8000:8000 --restart=no --runtime=runc -t -d mydypy
-
 docker save mydypy:latest -o mydypyt_latest.tar
 docker load -i mydypyt_latest.tar
+
+// docker run -it -p 8080:8080 --user=root -v /var/run/docker.sock:/var/run/docker.sock -v /tmp:/tmp kestra/kestra:latest-full server local
+// docker run --hostname=79a3adb99c2a --env=PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin --env=LANG=C.UTF-8 --env=GPG_KEY=A035C8C19219BA821ECEA86B64E628F8D684696D --env=PYTHON_VERSION=3.11.8 --env=PYTHON_PIP_VERSION=24.0 --env=PYTHON_SETUPTOOLS_VERSION=65.5.1 --env=PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/dbf0c85f76fb6e1ab42aa672ffca6f0a675d9ee4/public/get-pip.py --env=PYTHON_GET_PIP_SHA256=dfe9fd5c28dc98b5ac17979a953ea550cec37ae1b47a5116007395bfacff2ab9 --env=PYTHONUNBUFFERED=1 --workdir=/pyone -p 8000:8000 --restart=no --runtime=runc -t -d mydypy
 
 
 https://hub.docker.com/r/kaymatrix/mydypy
